@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Items {
+public class Item {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +26,10 @@ public class Items {
     @Column(name = "img_url")
     private String imgUrl;
 
-    public Items() {
+    public Item() {
     }
 
-    public Items(String title, String description, Double price, String imgUrl) {
+    public Item(String title, String description, Double price, String imgUrl) {
         this.title = title;
         this.description = description;
         this.price = price;
