@@ -1,5 +1,8 @@
 package com.jf.menu.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +34,7 @@ public class Owner {
     private String password;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Restaurant restaurant;
+    private List<Restaurant> restaurants;
 
     public Owner() {
     }
@@ -83,14 +86,20 @@ public class Owner {
         this.password = password;
     }
 
-	public Restaurant getRestaurant() {
-		return restaurant;
+	public List<Restaurant> getRestaurant() {
+		return this.restaurants;
 	}
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+	public void setRestaurant(List<Restaurant> restaurants) {
+		this.restaurants = restaurants;
 	}
 
+    public void addRestaurant(Restaurant restaurant){
+        if(this.restaurants == null){
+            this.restaurants = new ArrayList<>();
+        }
+        this.restaurants.add(restaurant);
+    }
     
 
     
