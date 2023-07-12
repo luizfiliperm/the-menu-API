@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -28,6 +30,10 @@ public class Category {
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items;
+
+    @ManyToOne()
+    @JoinColumn(name = "menu_id")
+    private Menu menu;
 
 	public Category() {
 	}
@@ -72,4 +78,14 @@ public class Category {
     public void addItem(Item item){
         this.items.add(item);
     }
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+    
 }
