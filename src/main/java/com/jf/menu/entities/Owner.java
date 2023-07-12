@@ -1,12 +1,16 @@
 package com.jf.menu.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "owner")
 public class Owner {
     
     @Id
@@ -25,6 +29,9 @@ public class Owner {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Restaurant restaurant;
 
     public Owner() {
     }
@@ -75,6 +82,16 @@ public class Owner {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+    
 
     
 }
