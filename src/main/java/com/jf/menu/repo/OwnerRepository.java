@@ -8,4 +8,6 @@ import com.jf.menu.entities.owner.Owner;
 public interface OwnerRepository extends JpaRepository<Owner, Long> {
     
     UserDetails findByEmail(String email);
+
+    Boolean existsByEmail(String email);
 }

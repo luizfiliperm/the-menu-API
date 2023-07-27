@@ -1,11 +1,13 @@
 package com.jf.menu.services;
 
+import com.jf.menu.entities.owner.AuhtReponseDTO;
+import com.jf.menu.entities.owner.LoginDto;
 import com.jf.menu.entities.owner.RegisterDto;
 
 public interface OwnerService {
 
-    String login(String email, String password);
+    AuhtReponseDTO login(LoginDto loginDto);
 
-    String register(RegisterDto registerDto);
+    AuhtReponseDTO register(RegisterDto registerDto);
 
 }
