@@ -1,7 +1,14 @@
 package com.jf.menu.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.jf.menu.entities.enums.UserRole;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,14 +21,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "owner")
-public class Owner {
+public class Owner implements UserDetails{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "first_name")
@@ -32,6 +39,9 @@ public class Owner {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private UserRole role;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Restaurant> restaurants;
@@ -82,6 +92,22 @@ public class Owner {
         return password;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -100,6 +126,41 @@ public class Owner {
         }
         this.restaurants.add(restaurant);
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == UserRole.ADMIN) 
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER") );
+        else 
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    
     
 
     
