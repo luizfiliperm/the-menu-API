@@ -1,4 +1,4 @@
-package com.jf.menu.entities;
+package com.jf.menu.entities.owner;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,7 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.jf.menu.entities.enums.UserRole;
+import com.jf.menu.entities.Restaurant;
+import com.jf.menu.entities.owner.enums.UserRole;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

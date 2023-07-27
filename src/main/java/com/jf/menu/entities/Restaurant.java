@@ -1,5 +1,7 @@
 package com.jf.menu.entities;
 
+import com.jf.menu.entities.owner.Owner;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

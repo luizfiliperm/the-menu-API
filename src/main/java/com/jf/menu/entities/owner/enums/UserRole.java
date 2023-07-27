@@ -1,4 +1,4 @@
-package com.jf.menu.entities.enums;
+package com.jf.menu.entities.owner.enums;
 
 public enum UserRole {
     ADMIN("admin"),
